@@ -140,26 +140,6 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: 127.0.0.1:6370/PatchUser
-    name: Patch
-    meta:
-      id: req_80eb9aab28244052841a97a69b2aafcc
-      created: 1743571784406
-      modified: 1743571812113
-      isPrivate: false
-      sortKey: -1743571784406
-    method: PATCH
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.0
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
