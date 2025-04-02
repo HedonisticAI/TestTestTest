@@ -10,7 +10,7 @@ type UserInfo struct {
 }
 
 type AgeRequest struct {
-	Age int `json:"age"`
+	Age int `json:"age,omitempty"`
 }
 
 type Country struct {
@@ -24,7 +24,7 @@ type NationRequest struct {
 }
 
 type GenderRequst struct {
-	Gender string `json:"gender"`
+	Gender string `json:"gender,omitempty"`
 	// Name        string  `json:"name"`
 	// Count       int     `json:"count"`
 	// Probability float32 `json:"probability"`

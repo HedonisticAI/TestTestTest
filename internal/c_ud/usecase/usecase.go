@@ -27,7 +27,7 @@ func NewAdd(DB *postgres.Postgres, Logger logger.Logger, GenderApi string, AgeAp
 	return &CUD{DB: DB, Logger: Logger, AgeApi: AgeApi, GenderApi: GenderApi, NationApi: NationApi}
 }
 
-const AddQuery = "insert into Users (Name, Surname, Partonimyc, Nation, Gender, Age) values ($1, $2, $3, $4, $5, $6) returning ID"
+const AddQuery = "insert into Users (Name, Surname, Patronymic, Nation, Gender, Age) values ($1, $2, $3, $4, $5, $6) returning ID"
 const DelQuery = "delete from Users where ID = $1;"
 
 func (CUD *CUD) AddUser(c *gin.Context) {
@@ -50,7 +50,6 @@ func (CUD *CUD) AddUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, "Name or surname absent")
 		return
 	}
-	CUD.Logger.Debug(CUD.AgeApi)
 	data, err := simplehttp.MakeRequest(CUD.AgeApi, GeneralInfo.Name)
 	if err != nil {
 		CUD.Logger.Error(err)
@@ -65,8 +64,8 @@ func (CUD *CUD) AddUser(c *gin.Context) {
 		return
 	}
 	if AgeInfo.Age == 0 {
-		c.JSON(http.StatusBadRequest, "Age for"+GeneralInfo.Name+"not found")
-		CUD.Logger.Error(http.StatusBadRequest, "Age for"+GeneralInfo.Name+"not found")
+		//		CUD.Logger.Error("Age for " + GeneralInfo.Name + " not found")
+		c.JSON(http.StatusBadRequest, "Age for "+GeneralInfo.Name+" not found")
 		return
 	}
 	data, err = simplehttp.MakeRequest(CUD.GenderApi, GeneralInfo.Name)
@@ -75,11 +74,15 @@ func (CUD *CUD) AddUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
-
 	err = json.Unmarshal(data, &GenderInfo)
 	if err != nil {
 		CUD.Logger.Error(err)
 		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+	if GenderInfo.Gender == "" {
+		//	CUD.Logger.Error("Gender for " + GeneralInfo.Name + " not found")
+		c.JSON(http.StatusBadRequest, "Gender for "+GeneralInfo.Name+"not found")
 		return
 	}
 	data, err = simplehttp.MakeRequest(CUD.NationApi, GeneralInfo.Name)
@@ -95,8 +98,8 @@ func (CUD *CUD) AddUser(c *gin.Context) {
 		return
 	}
 	if NationInfo.Country == nil {
-		c.JSON(http.StatusBadRequest, "Nation for"+GeneralInfo.Name+"not found")
-		CUD.Logger.Error("Nation for" + GeneralInfo.Name + "not found")
+		c.JSON(http.StatusBadRequest, "Nation for "+GeneralInfo.Name+"not found")
+		CUD.Logger.Error("Nation for " + GeneralInfo.Name + "not found")
 		return
 	}
 	GeneralInfo.Age = AgeInfo.Age
@@ -163,9 +166,9 @@ func (CUD *CUD) ChangeUser(c *gin.Context) {
 		QueryStr = QueryStr + "Surname" + "=$" + strconv.Itoa(iter) + ","
 		iter++
 	}
-	if val, ok := Values["partonimyc"]; ok {
+	if val, ok := Values["Patronymic"]; ok {
 		Query = append(Query, val)
-		QueryStr = QueryStr + "Partonimyc" + "=$" + strconv.Itoa(iter) + ","
+		QueryStr = QueryStr + "Patronymic" + "=$" + strconv.Itoa(iter) + ","
 		iter++
 	}
 	if val, ok := Values["nation"]; ok {
