@@ -2,8 +2,8 @@ package main
 
 import (
 	"testtesttest/config"
+	"testtesttest/internal/app"
 	"testtesttest/pkg/logger"
-	"testtesttest/pkg/postgres"
 )
 
 func main() {
@@ -12,9 +12,10 @@ func main() {
 	if Config == nil {
 		Logger.Info("Bad config")
 	}
-	DB, err := postgres.NewDB(*Config)
+	App, err := app.NewApp(*Logger, *Config)
 	if err != nil {
-		Logger.Error(err.Error())
+		Logger.Error(err)
+		return
 	}
-	defer DB.Close()
+	App.Run()
 }

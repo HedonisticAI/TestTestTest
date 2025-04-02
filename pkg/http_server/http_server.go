@@ -32,6 +32,10 @@ func (S *HttpServer) MapPut(path string, Handler func(c *gin.Context)) {
 	S.Server.PUT(path, Handler)
 }
 
+func (S *HttpServer) MapPatch(path string, Handler func(c *gin.Context)) {
+	S.Server.PATCH(path, Handler)
+}
+
 func (S *HttpServer) Run() {
 	S.Server.Run(S.Port)
 }
