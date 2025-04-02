@@ -1,0 +1,3 @@
+migration created by goose
+to run migration:
+goose -dir db/migrations postgres "postgresql://goose:password@127.0.0.1:5432/test?sslmode=disable" up
