@@ -1,0 +1,175 @@
+type: collection.insomnia.rest/5.0
+name: TestTest
+meta:
+  id: wrk_bbf136d77194434587801a7fb4be2783
+  created: 1743571515094
+  modified: 1743571515094
+collection:
+  - url: 127.0.0.1:6370/GetUser
+    name: Get
+    meta:
+      id: req_29971d43e4264471b432971fc88b8219
+      created: 1743571520120
+      modified: 1743610150791
+      isPrivate: false
+      sortKey: -1743571520120
+    method: GET
+    parameters:
+      - id: pair_8e0f5130e8c141ff8a35ae9ebed82478
+        name: page_size
+        value: "3"
+        disabled: false
+      - id: pair_f66eada132a7460ead955b68e00790cc
+        name: page_num
+        value: "0"
+        disabled: false
+      - id: pair_1b2f4ac0b34e4856a825b5b419654b8c
+        name: nation
+        value: SK
+        disabled: true
+      - id: pair_e43377081b52424591d1a8f7fe134957
+        name: age
+        value: "44"
+        disabled: true
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: 127.0.0.1:6370/AddUser
+    name: Add
+    meta:
+      id: req_539e967e08a842aab0895f98ce257705
+      created: 1743571690428
+      modified: 1743609001446
+      isPrivate: false
+      sortKey: -1743571690428
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        "name": "Dmitriy",
+        "surname": "Ushakov"
+        }
+    parameters:
+      - id: pair_adc49eb6b68848efac63594de388aefe
+        name: page_num
+        value: "0"
+        disabled: true
+      - id: pair_3c54f9ce75984a65bcf71c037b9f4215
+        name: page_size
+        value: "2"
+        disabled: true
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: 127.0.0.1:6370/DeleteUser
+    name: Delete
+    meta:
+      id: req_555b97ffb4764306994aaf113b6ebfd8
+      created: 1743571728995
+      modified: 1743586259151
+      isPrivate: false
+      sortKey: -1743571728995
+    method: DELETE
+    parameters:
+      - id: pair_93d738333dcb48c8837e851f272d15fc
+        name: ID
+        value: "1"
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: 127.0.0.1:6370/ChangeUser
+    name: Change
+    meta:
+      id: req_39c462bf55da47d59e3bf49690213118
+      created: 1743571756062
+      modified: 1743595315791
+      isPrivate: false
+      sortKey: -1743571756062
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nation": "nationLul",
+        	"gender": "MISTA",
+        	"pepega": "PepegA"
+        }
+    parameters:
+      - id: pair_3a8acdbc1b284962863e46f9d65c71d2
+        name: ID
+        value: "2"
+        disabled: false
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: 127.0.0.1:6370/PatchUser
+    name: Patch
+    meta:
+      id: req_80eb9aab28244052841a97a69b2aafcc
+      created: 1743571784406
+      modified: 1743571812113
+      isPrivate: false
+      sortKey: -1743571784406
+    method: PATCH
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_1c9680381f84f5848599ab3276896ff83f5f30b4
+    created: 1743571515099
+    modified: 1743571515099
+environments:
+  name: Base Environment
+  meta:
+    id: env_1c9680381f84f5848599ab3276896ff83f5f30b4
+    created: 1743571515097
+    modified: 1743571515097
+    isPrivate: false
