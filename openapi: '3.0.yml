@@ -2,14 +2,90 @@ openapi: '3.0.3'
 info:
   title: PersonalInfoApi
   version: '1.0'
-
-
+components:
+  schemas:
+    ResponseMessage:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The status code of the response
+        message:
+          type: string
+          description: Descriptive message associated with the response
+      required:
+        - code
+        - message
+    AddUser:
+      type: object
+      properties:
+        name:
+          type: string
+          description: users name
+        surname:
+          type: string
+          description: users surname
+        patronymic:
+          type: string
+          description: users patronymic
+      required:
+        - name
+        - surname
+    UserInfo:
+      type: object
+      properties:
+        ID:
+          type: integer
+          description: Unique identifier for the user
+        name:
+          type: string
+          description: The user's first name
+        surname:
+          type: string
+          description: The user's last name
+        patronymic:
+          type: string
+          description: The user's  patronymic
+        gender:
+          type: string
+          description: The user's gender
+        age:
+          type: integer
+          description: The user's age
+        nation:
+          type: string
+          description: The user's nation
+      required:
+        - ID
+        - name
+        - surname
+    UserInfoArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserInfo'
 paths:
   /AddUser:
     post:
-      responses:
+      description: "Add User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/AddUser'
+      responses: 
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+        '400':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
   /DeleteUser:
     delete:
       description: 'Delete by ID'
@@ -23,6 +99,22 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+        '204':
+          description: No content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
   /GetUser:
     get:
       description: ''
@@ -78,8 +170,22 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfoArray'
         '204':
-          description: "No content"
+          description: No content 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+        '400':
+          description: No content 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
   /ChangeUser:
     put:
       description: ''
@@ -87,4 +193,14 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMessage'
   

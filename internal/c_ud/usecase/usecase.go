@@ -133,7 +133,7 @@ func (CUD *CUD) DeleteUser(c *gin.Context) {
 		return
 	}
 	if rows == 0 {
-		c.JSON(http.StatusBadRequest, "No entry found")
+		c.JSON(http.StatusNoContent, "No entry found")
 		//		CUD.Logger.Error("no entry")
 		return
 	}
