@@ -3,6 +3,7 @@ info:
   title: PersonalInfoApi
   version: '1.0'
 
+
 paths:
   /AddUser:
     post:
@@ -11,19 +12,74 @@ paths:
           description: OK
   /DeleteUser:
     delete:
-      description: ''
-      parameters: [
-          ]
+      description: 'Delete by ID'
+      parameters:
+          - name: ID
+            in: query
+            required: true
+            description: ID of a User to delete
+            schema:
+              type: integer
       responses:
         '200':
           description: OK
   /GetUser:
     get:
       description: ''
-      parameters: []
+      parameters: 
+            - name: page_num
+              in: query
+              required: true
+              description: number of a page
+              schema:
+                type: integer
+            - name: page_size
+              in: query
+              required: true
+              description: size of a page
+              schema:
+                type: integer
+            - name: age
+              in: query
+              required: false
+              description: age of a person
+              schema:
+                type: integer
+            - name: name
+              in: query
+              required: false
+              description: name of a person
+              schema:
+                type: string
+            - name: surname
+              in: query
+              required: false
+              description: surname of a person
+              schema:
+                type: string
+            - name: nation
+              in: query
+              required: false
+              description: nation of a person
+              schema:
+                type: string
+            - name: gender
+              in: query
+              required: false
+              description: gender of a person
+              schema:
+                type: string
+            - name: patronymic
+              in: query
+              required: false
+              description: patronymic of a person
+              schema:
+                type: string
       responses:
         '200':
           description: OK
+        '204':
+          description: "No content"
   /ChangeUser:
     put:
       description: ''
