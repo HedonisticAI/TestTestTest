@@ -23,6 +23,8 @@ func (S *Search) SearchWithPagination(c *gin.Context) {
 	var QueryStr = SearchBegin
 	var Values []interface{}
 	var iter = 0
+	var isRows = 0
+
 	S.Logger.Debug("Got Search Request")
 	if c.Query("page_num") == "" || c.Query("page_size") == "" {
 		c.JSON(http.StatusBadRequest, "No page_num or page_size")
@@ -74,11 +76,13 @@ func (S *Search) SearchWithPagination(c *gin.Context) {
 	db := S.DB.Get()
 	S.Logger.Debug("Making request with " + QueryStr)
 	rows, err := db.Query(QueryStr, Values...)
+	rows.Scan(&isRows)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err)
 		return
 	}
 	for rows.Next() {
+		isRows++
 		val := search.UserInfo{}
 		err = rows.Scan(&val.ID, &val.Name, &val.Surname, &val.Patronymic, &val.Nation, &val.Gender, &val.Age)
 		if err != nil {
@@ -86,6 +90,11 @@ func (S *Search) SearchWithPagination(c *gin.Context) {
 			return
 		}
 		Resp.UserInfo = append(Resp.UserInfo, val)
+	}
+	if isRows == 0 {
+		S.Logger.Debug("no rows found")
+		c.JSON(http.StatusNoContent, "")
+		return
 	}
 	c.JSON(http.StatusOK, Resp)
 }

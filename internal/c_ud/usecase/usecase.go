@@ -166,7 +166,7 @@ func (CUD *CUD) ChangeUser(c *gin.Context) {
 		QueryStr = QueryStr + "Surname" + "=$" + strconv.Itoa(iter) + ","
 		iter++
 	}
-	if val, ok := Values["Patronymic"]; ok {
+	if val, ok := Values["patronymic"]; ok {
 		Query = append(Query, val)
 		QueryStr = QueryStr + "Patronymic" + "=$" + strconv.Itoa(iter) + ","
 		iter++
@@ -197,7 +197,7 @@ func (CUD *CUD) ChangeUser(c *gin.Context) {
 	db.QueryRow(QueryStr, Query...).Scan(&ID)
 	FinalID := strconv.Itoa(ID)
 	CUD.Logger.Debug("Query str ready " + QueryStr)
-	c.JSON(http.StatusOK, "Entry modi fed ID:"+FinalID)
+	c.JSON(http.StatusOK, "Entry modifed ID:"+FinalID)
 }
 
 // Yes, it is sorted, but we cant be sure, so lets sort it

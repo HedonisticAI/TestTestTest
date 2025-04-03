@@ -1,9 +1,8 @@
 openapi: '3.0.3'
 info:
-  title: API Title
+  title: PersonalInfoApi
   version: '1.0'
-servers:
-  - url: https://api.server.test/v1
+
 paths:
   /AddUser:
     post:
@@ -13,14 +12,23 @@ paths:
   /DeleteUser:
     delete:
       description: ''
-      parameters: []
+      parameters: [
+          ]
       responses:
         '200':
           description: OK
-  /name:
+  /GetUser:
     get:
       description: ''
       parameters: []
       responses:
         '200':
           description: OK
+  /ChangeUser:
+    put:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  
